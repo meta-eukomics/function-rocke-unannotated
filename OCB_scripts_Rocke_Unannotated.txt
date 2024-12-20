@@ -1,0 +1,53 @@
+#Terminal commands to count unannotated taxa:
+
+#column 4 - GOs
+awk -F',' '$4 == 0 {count++} END {print count}' TaxonomicAndFunctionalAnnotations_CAG.csv
+
+
+awk -F',' '$14 == "NA" {count++} END {print count}' HS039_S90_L004.bf100.id99.tax.ko.counts.Armbrust.lab.csv
+awk -F',' '$13 == "" {count++} END {print count}' MATOU-output-compute.csv
+
+awk -F'\t' '$5 == "NA" {count++} END {print count}' HS039_output.tsv
+
+awk -F',' '$9 == "NA" {count++} END {print count}' counts_metat_df_annot.csv
+
+awk -F'\t' '$31 == "-" {count++} END {print count}' Chappell_OutputFile_MetaTIntercalHackathon_All.txt
+wc -l < Chappell_OutputFile_MetaTIntercalHackathon_All.txt
+awk -F',' '$22 == "" {count++} END {print count}' TPM_orfs_eggnog_eukprot_phylodb.csv
+
+
+34
+awk -F',' '$34 == "NA" {count++} END {print count}' OCB_tax_phylodb_new_eggnog.csv
+
+awk -F'\t' '$6 == "NA" {count++} END {print count}' Output_dataframe_forhackathon_Hu.txt
+
+
+awk -F'\t' '$6 == "NA" {count++} END {print count}' Output_dataframe_forhackathon_Hu.txt
+
+awk -F',' '$13 == "" {count++} END {print count}' MATOU-output-compute.csv
+
+/work/ocb_2024fall/data/individual-assemblies-HS039/
+
+#count the number of rows (sub relevant column number for 1, 2 & 3) that contain blank cells in multiple columns (Ie:GO, KEGG, & PFAM)
+awk -F',' '($4 == "" || $5 == "" || $6 == "" || $7 == "") {count++} END {print count}' TaxonomicAndFunctionalAnnotations_CAG.csv
+
+cut -f4,5,7 MarFERReT_id.tsv > MarFERReT_id.tsv
+
+#add a column from one .tsv file and merge to another one:
+sort -k1,1 abundance.tsv > sorted_abundance.tsv
+sort -k1,2 Diamond_pfam_tax_counts.tsv > sorted_Diamond_pfam_tax_counts.tsv
+
+#translate csv to tsv:
+tr ',' '\t' < Diamond_pfam_tax_counts.csv > Diamond_pfam_tax_counts.tsv
+
+awk 'FNR==NR {map[$3]=$7; next} {print $7, ($8 in map) ? map[$8] : "NA"}' MarFERReT_id.tsv Diamond_pfam_tax_counts.tsv > outputA.tsv
+
+awk 'BEGIN{FS=OFS="\t"} NR==8 {gsub("V14", "marferret_name")} {print}' Diamond_pfam_tax_counts.tsv > renamed_Diamond_pfam_tax_counts.tsv
+
+#pull all rows where there are no functional annotations in the CAG (12849463 rows):
+
+awk -F',' '($4 == "" && $5 == "" && $6 == "" && $7 == "")' TaxonomicAndFunctionalAnnotations_CAG.csv > no_function.csv
+
+
+rsync -avz emma.rocke@hpc.uct.ac.za:K060394_S20_R1_001_fastqc.html ~/Desktop/
+
