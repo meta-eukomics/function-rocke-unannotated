@@ -2,8 +2,6 @@
 
 #column 4 - GOs
 awk -F',' '$4 == 0 {count++} END {print count}' TaxonomicAndFunctionalAnnotations_CAG.csv
-
-
 awk -F',' '$14 == "NA" {count++} END {print count}' HS039_S90_L004.bf100.id99.tax.ko.counts.Armbrust.lab.csv
 awk -F',' '$13 == "" {count++} END {print count}' MATOU-output-compute.csv
 
@@ -15,8 +13,6 @@ awk -F'\t' '$31 == "-" {count++} END {print count}' Chappell_OutputFile_MetaTInt
 wc -l < Chappell_OutputFile_MetaTIntercalHackathon_All.txt
 awk -F',' '$22 == "" {count++} END {print count}' TPM_orfs_eggnog_eukprot_phylodb.csv
 
-
-34
 awk -F',' '$34 == "NA" {count++} END {print count}' OCB_tax_phylodb_new_eggnog.csv
 
 awk -F'\t' '$6 == "NA" {count++} END {print count}' Output_dataframe_forhackathon_Hu.txt
@@ -28,7 +24,7 @@ awk -F',' '$13 == "" {count++} END {print count}' MATOU-output-compute.csv
 
 /work/ocb_2024fall/data/individual-assemblies-HS039/
 
-#count the number of rows (sub relevant column number for 1, 2 & 3) that contain blank cells in multiple columns (Ie:GO, KEGG, & PFAM)
+#count the number of rows that contain blank cells in multiple columns (Ie:GO, KEGG, & PFAM)
 awk -F',' '($4 == "" || $5 == "" || $6 == "" || $7 == "") {count++} END {print count}' TaxonomicAndFunctionalAnnotations_CAG.csv
 
 cut -f4,5,7 MarFERReT_id.tsv > MarFERReT_id.tsv
@@ -48,6 +44,4 @@ awk 'BEGIN{FS=OFS="\t"} NR==8 {gsub("V14", "marferret_name")} {print}' Diamond_p
 
 awk -F',' '($4 == "" && $5 == "" && $6 == "" && $7 == "")' TaxonomicAndFunctionalAnnotations_CAG.csv > no_function.csv
 
-
-rsync -avz emma.rocke@hpc.uct.ac.za:K060394_S20_R1_001_fastqc.html ~/Desktop/
 
